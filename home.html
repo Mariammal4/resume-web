@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<!-- HERO SECTION -->
+<div class="hero">
+    <div class="hero-content">
+        <h1>Make a great resume Simply</h1>
+        <p>Create a powerful resume in minutes.</p>
+        <a href="{{ url_for('signup') }}" class="btn-primary">
+            Create Your Resume
+        </a>
+    </div>
+</div>
+
+<!-- FEATURES SECTION -->
+<section class="features">
+
+    <div class="features-container">
+
+        <!-- LEFT IMAGE -->
+        <div class="features-left">
+            <img src="https://wallpaperaccess.com/full/3851273.jpg" alt="resume">
+        </div>
+
+        <!-- RIGHT CONTENT -->
+        <div class="features-right">
+
+            <div class="feature-item">
+                <span class="number">1</span>
+                <h3>Users can create a new account using their email and password.</h3>
+            </div>
+
+            <div class="feature-item">
+                <span class="number">2</span>
+                <h3>Enhance your resume with expert content</h3>
+            </div>
+
+            <div class="feature-item">
+                <span class="number">3</span>
+                <h3>Professionally designed </h3>
+            </div>
+
+            <div class="feature-item">
+                <span class="number">4</span>
+                <div>
+                    <h3>Expert simple resume</h3>
+                    </div>
+            </div>
+
+            <div class="feature-item">
+                <span class="number">5</span>
+                <h3>Apply for jobs with confidence</h3>
+            </div>
+        </div>
+    </div>
+
+<section class="steps-section">
+
+<h1>Get Your Standout Resume in 4 Easy Steps!</h1>
+
+<div class="steps-container">
+<div class="step-card">
+<h3>1.Choose Easy Resume</h3>
+<p>Start strong with professional.</p>
+</div>
+
+<div class="step-card">
+<h3>2. Fill Resume Details</h3>
+<p>Upload existing or build new with expert content.</p>
+</div>
+
+<div class="step-card">
+<h3>3.Save The Resume</h3>
+<p>Your details.</p>
+</div>
+
+<div class="step-card">
+<h3>4. Download & Shine!</h3>
+<p>Download your resume and apply with confidence.</p>
+</div>
+
+</div>
+<div class="center-btn">
+    <a href="{{ url_for('education') }}" class="btn-primary">Build Your Resume</a>
+    </div>
+
+    
+</section>
+
+{% endblock %}

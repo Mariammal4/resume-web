@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div style="max-width:700px; margin:auto; padding:30px; background:white; border-radius:10px; box-shadow:0 0 10px rgba(0,0,0,0.1);">
+
+    <h1 style="margin-bottom:5px;">{{ resume.name }}</h1>
+
+    <p><b>Email:</b> {{ resume.email }}</p>
+    <p><b>Phone:</b> {{ resume.phone }}</p>
+
+    {% if resume.linkedin %}
+    <p><b>LinkedIn:</b> {{ resume.linkedin }}</p>
+    {% endif %}
+
+    <hr>
+
+    <h2>Profile</h2>
+    <p>{{ resume.profile }}</p>
+
+    <h2>Education</h2>
+    <p>{{ resume.education }}</p>
+    
+    {% if resume.technical_skills %}
+    <h2>Technical Skills</h2>
+    <p>{{ resume.technical_skills }}</p>
+    {% endif %}
+
+    {% if resume.soft_skills %}
+    <h2>Soft Skills</h2>
+    <p>{{ resume.soft_skills }}</p>
+    {% endif %}
+
+    {% if resume.experience %}
+    <h2>Experience</h2>
+    <p>{{ resume.experience }}</p>
+    {% endif %}
+
+  {% if resume.declaration %}
+  <h2>Declaration</h2>
+  <p>{{ resume.declaration }}</p>
+
+  <p><b>Place:</b> {{ resume.place }}</p>
+  <p><b>Date:</b> {{ resume.date }}</p>
+  {% endif %}
+
+<br><br>
+
+    
+
+ <a href="{{ url_for('download', id=resume.id) }}">
+        <button style="
+            padding:12px 25px;
+            background:#007BFF;
+            color:white;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+            font-size:16px;
+        ">
+            Download PDF
+        </button>
+    </a>
+
+</div>
+
+{% endblock %}

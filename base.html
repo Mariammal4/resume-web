@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ResumeLab</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Montserrat&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar">
+    <h2 class="logo">ResumeBuild</h2>
+
+    <div class="nav-links">
+        <a href="/login" class="nav-btn">Login</a>
+        <a href="/signup" class="nav-btn primary">Signup</a>
+    </div>
+</nav>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

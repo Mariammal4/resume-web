@@ -1,0 +1,178 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<style>
+.resume-container { display: flex; gap: 20px; padding: 20px; }
+.resume-box { flex: 1; max-width: 600px; background: #f9f9f9; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); overflow-y: auto; max-height: 90vh; }
+.resume-preview { flex: 1; max-width: 500px; background: #fff; padding: 25px; border-radius: 12px; border: 1px solid #ddd; font-family: 'Helvetica', Arial, sans-serif; font-size: 14px; line-height: 1.5; box-shadow: 0 2px 6px rgba(0,0,0,0.1); overflow-y: auto; max-height: 90vh; }
+.resume-preview h1 { margin: 0; font-size: 24px; text-transform: uppercase; color: #333; }
+.resume-preview h2 { font-size: 18px; color: #555; margin-top: 20px; margin-bottom: 5px; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
+.resume-preview p { margin: 5px 0; color: #333; }
+.input-group { display: flex; flex-direction: column; margin-bottom: 10px; }
+.row { display: flex; gap: 10px; flex-wrap: wrap; }
+input, textarea { padding: 8px; border-radius: 6px; border: 1px solid #ccc; width: 100%; box-sizing: border-box; }
+textarea { resize: vertical; }
+button { padding: 10px 20px; background: #007BFF; color: white; border: none; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+</style>
+
+<div class="resume-container">
+    <!-- LEFT: FORM -->
+    <div class="resume-box">
+        <h2>Resume Details</h2>
+        <form method="POST">
+            <!-- OBJECTIVE -->
+            <div class="input-group">
+                <label>Objective</label>
+                <input type="text" name="objective" id="objective" onkeyup="updatePreview()" required>
+            </div>
+
+            <!-- Contact -->
+            <div class="input-group">
+                <label>Full Name *</label>
+                <input type="text" name="full_name" id="full_name" onkeyup="updatePreview()" required>
+            </div>
+            <div class="input-group">
+                <label>Email *</label>
+                <input type="email" name="email" id="email" onkeyup="updatePreview()" required>
+            </div>
+            <div class="input-group">
+                <label>Phone</label>
+                <input type="text" name="phone" id="phone" onkeyup="updatePreview()">
+            </div>
+            <div class="input-group">
+                <label>LinkedIn URL</label>
+                <input type="url" name="linkedin" id="linkedin" onkeyup="updatePreview()">
+            </div>
+
+            <!-- Education -->
+            <h2>Education</h2>
+            <div class="input-group">
+                <label>Institution, Degree, Year</label>
+                <input type="text" name="education" id="education" onkeyup="updatePreview()">
+            </div>
+
+            <!-- Skills -->
+            <h2>Skills</h2>
+            <div class="input-group">
+                <label>Technical Skills</label>
+                <textarea name="technical_skills" id="technical_skills" rows="3" onkeyup="updatePreview()"></textarea>
+            </div>
+            <div class="input-group">
+                <label>Soft Skills</label>
+                <textarea name="soft_skills" id="soft_skills" rows="2" onkeyup="updatePreview()"></textarea>
+            </div>
+
+            <!-- Experience -->
+            <h2>Experience</h2>
+            <div class="input-group">
+                <label>Experience Details</label>
+                <textarea name="experience" id="experience" rows="4" onkeyup="updatePreview()"></textarea>
+            </div>
+
+            <!-- Profile -->
+            <h2>Profile / Summary</h2>
+            <div class="input-group">
+                <label>Profile Summary</label>
+                <textarea name="profile" id="profile" rows="4" onkeyup="updatePreview()"></textarea>
+            </div>
+
+            <!-- DECLARATION -->
+            <h2>Declaration</h2>
+            <div class="input-group">
+                <label>Declaration</label>
+                <textarea name="declaration" id="declaration" rows="4" onkeyup="updatePreview()"></textarea>
+                
+                <!-- PLACE & DATE INPUTS -->
+                <label>Place</label>
+                <input type="text" name="place" id="place_input" onkeyup="updatePreview()">
+                <label>Date</label>
+                <input type="text" name="date" id="date_input" onkeyup="updatePreview()">
+            </div>
+            
+            <button type="submit">Save & Continue</button>
+        </form>
+    </div>
+
+    <!-- RIGHT: LIVE PREVIEW -->
+    <div class="resume-preview" id="preview">
+         <h1 id="preview_name">Your Name</h1>
+
+       <h2>Objective</h2>
+       <p id="preview_objective">Your objective...</p>
+       <p><b>Email:</b> <span id="preview_email">example@mail.com</span></p>
+       <p><b>Phone:</b> <span id="preview_phone">1234567890</span></p>
+       <p><b>LinkedIn:</b> <span id="preview_linkedin">https://linkedin.com/in/username</span></p>
+
+        <h2>Education</h2>
+        <p id="preview_education">Institution, Degree, Year</p>
+
+        <h2>Technical Skills</h2>
+        <p id="preview_technical_skills">HTML, CSS, Python</p>
+
+        <h2>Soft Skills</h2>
+        <p id="preview_soft_skills">Communication, Leadership</p>
+
+        <h2>Experience</h2>
+        <p id="preview_experience">Worked on projects...</p>
+
+        <h2>Profile Summary</h2>
+        <p id="preview_profile">Your summary...</p>
+
+        <h2>Declaration</h2>
+        <p id="preview_declaration">Your declaration...</p>
+        <p><b>Place:</b> <span id="preview_place">__________</span></p>
+        <p><b>Date:</b> <span id="preview_date">__________</span></p>
+    </div>
+</div>
+
+<!-- PERFECT SCRIPT -->
+<script>
+function updatePreview() {
+    document.getElementById('preview_objective').innerText = 
+        document.getElementById('objective').value || 'Your objective...';
+    
+    document.getElementById('preview_name').innerText = 
+        document.getElementById('full_name').value || 'Your Name';
+    
+    document.getElementById('preview_email').innerText = 
+        document.getElementById('email').value || 'example@mail.com';
+    
+    document.getElementById('preview_phone').innerText = 
+        document.getElementById('phone').value || '1234567890';
+    
+    document.getElementById('preview_linkedin').innerText = 
+        document.getElementById('linkedin').value || 'https://linkedin.com/in/username';
+    
+    document.getElementById('preview_education').innerText = 
+        document.getElementById('education').value || 'Institution, Degree, Year';
+    
+    document.getElementById('preview_technical_skills').innerText = 
+        document.getElementById('technical_skills').value || 'HTML, CSS, Python';
+    
+    document.getElementById('preview_soft_skills').innerText = 
+        document.getElementById('soft_skills').value || 'Communication, Leadership';
+    
+    document.getElementById('preview_experience').innerText = 
+        document.getElementById('experience').value || 'Worked on projects...';
+    
+    document.getElementById('preview_profile').innerText = 
+        document.getElementById('profile').value || 'Your summary...';
+    
+    document.getElementById('preview_declaration').innerText = 
+        document.getElementById('declaration').value || 'Your declaration...';
+    
+    // Place & Date
+    const placeInput = document.getElementById('place_input');
+    const dateInput = document.getElementById('date_input');
+    if (placeInput) document.getElementById('preview_place').innerText = placeInput.value || '__________';
+    if (dateInput) document.getElementById('preview_date').innerText = dateInput.value || '__________';
+}
+
+function changeTemplate(){
+    let value = document.getElementById("templateSelect")?.value;
+    const preview = document.getElementById("preview");
+    if (preview && value) preview.className = value;
+}
+</script>
+
+{% endblock %}
